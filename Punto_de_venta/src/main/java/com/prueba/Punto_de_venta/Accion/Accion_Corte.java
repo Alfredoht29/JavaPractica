@@ -14,11 +14,12 @@ public class Accion_Corte {
         while(rs.next()) {
             corte = rs.getDouble("dinero");
         }
+        sql.close();
         rs.close();
         PreparedStatement sql2 = connection.prepareStatement("INSERT INTO Caja\n" +
                 "(id_Caja,\n" +
-                "Dinero,\n" +
-                "Hora_Corte)\n" +
+                "dinero,\n" +
+                "hora_Corte)\n" +
                 "VALUES\n" +
                 "(NULL,\n" +
                 "?,\n" +

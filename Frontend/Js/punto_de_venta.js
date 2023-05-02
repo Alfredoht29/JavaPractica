@@ -109,5 +109,7 @@ function Pagar() {
                 alert("Error compra no realizada")
             }
         });
+    }else{
+        alert("La cuenta no se ha pagado")
     }
 }

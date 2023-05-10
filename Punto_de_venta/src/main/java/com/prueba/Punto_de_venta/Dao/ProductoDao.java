@@ -2,10 +2,7 @@ package com.prueba.Punto_de_venta.Dao;
 import com.prueba.Punto_de_venta.DbConfig;
 import com.prueba.Punto_de_venta.Modelos.Producto;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +11,9 @@ public class ProductoDao {
     public List<Producto> getInventario() throws SQLException {
         List<Producto> productosList=new ArrayList();
         Connection connection= DbConfig.getConnection();
-        Statement sql = connection.createStatement();
-        ResultSet rs = sql.executeQuery("SELECT * FROM inventario WHERE stock > 0");
+        CallableStatement cstmt=connection.prepareCall("{call inventario()}");
+        cstmt.execute();
+        ResultSet rs = cstmt.getResultSet();
         while (rs.next()){
             Producto producto = new Producto();
             producto.setId(rs.getInt("id_producto"));
